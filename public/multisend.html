@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MultiSend - AirPass</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="logo.png" type="image/png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </head>
+  <body>
+    <div class="app-root">
+      <!-- RESPONSIVE NAVBAR -->
+      <header class="navbar" aria-label="AirPass main navigation">
+        <div class="container">
+          <div class="nav-left">
+            <span class="nav-brand">AIRPASS</span>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="send.html" class="nav-link">Send File</a>
+            <a href="multisend.html" class="nav-link active">MultiSend</a>
+            <a href="receive.html" class="nav-link">Receive File</a>
+            <a href="qr.html" class="nav-link">QR Share</a>
+            <a href="chat.html" class="nav-link">ChatUs</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="about.html" class="nav-link">About</a>
+          </nav>
+          
+          <!-- Mobile Hamburger Menu -->
+          <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="index.html" class="mobile-nav-link">Home</a>
+          <a href="send.html" class="mobile-nav-link">Send File</a>
+          <a href="multisend.html" class="mobile-nav-link active">MultiSend</a>
+          <a href="receive.html" class="mobile-nav-link">Receive File</a>
+          <a href="qr.html" class="mobile-nav-link">QR Share</a>
+          <a href="chat.html" class="mobile-nav-link">ChatUs</a>
+          <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="about.html" class="mobile-nav-link">About</a>
+        </nav>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content" style="padding-top: 120px;">
+        <div class="container">
+          <section class="upload-section">
+            <div class="upload-card">
+              <div class="card-header">
+                <h1>MultiSend Files</h1>
+                <p>Select multiple files to create a secure ZIP package</p>
+              </div>
+
+              <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">
+                  <div class="box-icon">📦</div>
+                </div>
+                <h3>Drop multiple files here or click to browse</h3>
+                <p>Multiple files will be compressed into a single ZIP file</p>
+                <p class="upload-hint">You can select files multiple times - they will be added to your list</p>
+                <input type="file" id="fileInput" multiple accept="*/*" style="display: none !important;" />
+                <button class="choose-files-btn" id="selectFilesBtn">Choose Files</button>
+              </div>
+
+              <!-- Selected Files List -->
+              <div class="selected-files" id="selectedFiles" style="display: none;">
+                <div class="files-header">
+                  <h4>📁 Selected Files</h4>
+                  <span class="file-count" id="fileCount">0 files</span>
+                </div>
+                <div id="fileList" class="file-list"></div>
+              </div>
+
+              <!-- Package Note Section -->
+              <div class="note-section">
+                <div class="note-header">
+                  <h4>Optional Note</h4>
+                  <span class="note-badge">Optional</span>
+                </div>
+                <div class="note-input-wrapper">
+                  <textarea 
+                    id="noteInput" 
+                    class="note-textarea"
+                    placeholder="Add a message for the recipient..."
+                    rows="4"
+                  ></textarea>
+                  <div class="note-footer">
+                    <span class="char-count" id="charCount">0/500</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Expiry Time Section -->
+              <div class="expiry-section">
+                <div class="expiry-header">
+                  <h4>Key Expiry Time</h4>
+                  <span class="expiry-badge">Security</span>
+                </div>
+                <div class="expiry-selector-wrapper">
+                  <div class="expiry-selector">
+                    <input 
+                      type="number" 
+                      id="expiryValue" 
+                      class="expiry-input" 
+                      min="1" 
+                      max="60" 
+                      value="12" 
+                      placeholder="12"
+                    >
+                    <select id="expiryUnit" class="expiry-dropdown">
+                      <option value="minutes">Minutes</option>
+                      <option value="hours" selected>Hours</option>
+                      <option value="days">Days</option>
+                    </select>
+                  </div>
+                  <small class="expiry-help">Key will expire after the specified time</small>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button id="clearBtn" class="btn btn-secondary" style="display: none;">Clear Files</button>
+                <button id="generateBtn" class="btn btn-primary" disabled>
+                  Generate Key (Create ZIP)
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <!-- Column 1 — AirPass -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">AirPass</h3>
+              <ul class="footer-links">
+                <li><a href="about.html" class="footer-link">About</a></li>
+                <li><a href="how-it-works.html" class="footer-link">How It Works</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 2 — File Tools -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">File Tools</h3>
+              <ul class="footer-links">
+                <li><a href="send.html" class="footer-link">Send File</a></li>
+                <li><a href="multisend.html" class="footer-link">MultiSend</a></li>
+                <li><a href="receive.html" class="footer-link">Receive File</a></li>
+                <li><a href="qr.html" class="footer-link">QR Share</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 3 — Support -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">Support</h3>
+              <ul class="footer-links">
+                <li><a href="#" class="footer-link">FAQs</a></li>
+                <li><a href="#" class="footer-link">Contact</a></li>
+                <li><a href="#" class="footer-link">Terms & Privacy</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Centered bottom line -->
+          <div class="footer-divider"></div>
+          <p class="footer-copyright">© AirPass · Secure File Sharing</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3>Creating ZIP File...</h3>
+        <p>Please wait while we compress your files</p>
+      </div>
+    </div>
+
+    <!-- Expired Key Modal -->
+    <div class="expired-modal-overlay" id="expiredModal">
+        <div class="expired-modal">
+            <div class="expired-modal-icon">⏰</div>
+            <h3>Key Expired</h3>
+            <p>This key has expired. Please ask the sender to upload again.</p>
+            <button class="expired-modal-btn" onclick="closeExpiredModal()">Try Again</button>
+        </div>
+    </div>
+
+    <script src="multisend.js"></script>
+    <script src="navbar.js"></script>
+  </body>
+</html>

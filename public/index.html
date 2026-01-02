@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirPass - Secure File Sharing</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="logo.png" type="image/png" />
+  </head>
+  <body>
+    <div class="app-root">
+      <!-- RESPONSIVE NAVBAR -->
+      <header class="navbar" aria-label="AirPass main navigation">
+        <div class="container">
+          <div class="nav-left">
+            <span class="nav-brand">AIRPASS</span>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="send.html" class="nav-link">Send File</a>
+            <a href="multisend.html" class="nav-link">MultiSend</a>
+            <a href="receive.html" class="nav-link">Receive File</a>
+            <a href="qr.html" class="nav-link">QR Share</a>
+            <a href="chat.html" class="nav-link">ChatUs</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="about.html" class="nav-link">About</a>
+          </nav>
+          
+          <!-- Mobile Hamburger Menu -->
+          <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="index.html" class="mobile-nav-link active">Home</a>
+          <a href="send.html" class="mobile-nav-link">Send File</a>
+          <a href="multisend.html" class="mobile-nav-link">MultiSend</a>
+          <a href="receive.html" class="mobile-nav-link">Receive File</a>
+          <a href="qr.html" class="mobile-nav-link">QR Share</a>
+          <a href="chat.html" class="mobile-nav-link">ChatUs</a>
+          <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="about.html" class="mobile-nav-link">About</a>
+        </nav>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- HERO SECTION -->
+        <section class="hero">
+          <div class="container">
+            <h1 class="hero-title">Welcome to AirPass</h1>
+            <p class="hero-tagline">Your secure file sharing solution</p>
+            <div class="hero-cta">
+              <a href="send.html" class="btn btn-primary">Send a file →</a>
+              <a href="receive.html" class="btn btn-secondary">Receive a file →</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 1 — FEATURE HIGHLIGHTS ROW -->
+        <section class="features-section">
+          <div class="container">
+            <div class="features-grid">
+              <!-- Feature Card 1 -->
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Instant Sharing</h3>
+                <p class="feature-description">Share files instantly with secure, generated keys</p>
+              </div>
+
+              <!-- Feature Card 2 -->
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <circle cx="12" cy="16" r="1"/>
+                    <path d="m7 11 0-5a5 5 0 0 1 10 0l0 5"/>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Secure Keys</h3>
+                <p class="feature-description">Military-grade encryption with auto-expiring keys</p>
+              </div>
+
+              <!-- Feature Card 3 -->
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <path d="M9 9h6v6H9z"/>
+                  </svg>
+                </div>
+                <h3 class="feature-title">QR Code Support</h3>
+                <p class="feature-description">Generate and scan QR codes for seamless transfers</p>
+              </div>
+
+              <!-- Feature Card 4 -->
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14,2 14,8 20,8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10,9 9,9 8,9"/>
+                  </svg>
+                </div>
+                <h3 class="feature-title">MultiSend</h3>
+                <p class="feature-description">Send multiple files in one secure ZIP package</p>
+              </div>
+
+              <!-- Feature Card 5 -->
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12,6 12,12 16,14"/>
+                  </svg>
+                </div>
+                <h3 class="feature-title">Auto-Expiry</h3>
+                <p class="feature-description">Files automatically expire for maximum security</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2 — SECURITY SECTION -->
+        <section class="security-section">
+          <div class="container">
+            <div class="security-content">
+              <!-- Left Side -->
+              <div class="security-left">
+                <div class="security-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                </div>
+                <h2 class="security-title">Security You Can Trust</h2>
+              </div>
+              
+              <!-- Right Side -->
+              <div class="security-right">
+                <ul class="security-features">
+                  <li class="security-feature">
+                    <span class="security-bullet">•</span>
+                    <span class="security-text">Encrypted transfers (HTTPS)</span>
+                  </li>
+                  <li class="security-feature">
+                    <span class="security-bullet">•</span>
+                    <span class="security-text">Automatic key expiry</span>
+                  </li>
+                  <li class="security-feature">
+                    <span class="security-bullet">•</span>
+                    <span class="security-text">No permanent storage</span>
+                  </li>
+                  <li class="security-feature">
+                    <span class="security-bullet">•</span>
+                    <span class="security-text">Zero tracking</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <!-- Column 1 — AirPass -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">AirPass</h3>
+              <ul class="footer-links">
+                <li><a href="about.html" class="footer-link">About</a></li>
+                <li><a href="how-it-works.html" class="footer-link">How It Works</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 2 — File Tools -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">File Tools</h3>
+              <ul class="footer-links">
+                <li><a href="send.html" class="footer-link">Send File</a></li>
+                <li><a href="multisend.html" class="footer-link">MultiSend</a></li>
+                <li><a href="receive.html" class="footer-link">Receive File</a></li>
+                <li><a href="qr.html" class="footer-link">QR Share</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 3 — Support -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">Support</h3>
+              <ul class="footer-links">
+                <li><a href="#" class="footer-link">FAQs</a></li>
+                <li><a href="#" class="footer-link">Contact</a></li>
+                <li><a href="#" class="footer-link">Terms & Privacy</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Centered bottom line -->
+          <div class="footer-divider"></div>
+          <p class="footer-copyright">© AirPass · Secure File Sharing</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="navbar.js"></script>
+  </body>
+</html>

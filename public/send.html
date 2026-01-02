@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send File - AirPass</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="logo.png" type="image/png" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </head>
+  <body>
+    <div class="app-root">
+      <!-- RESPONSIVE NAVBAR -->
+      <header class="navbar" aria-label="AirPass main navigation">
+        <div class="container">
+          <div class="nav-left">
+            <span class="nav-brand">AIRPASS</span>
+          </div>
+          
+          <!-- Desktop Navigation -->
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="send.html" class="nav-link active">Send File</a>
+            <a href="multisend.html" class="nav-link">MultiSend</a>
+            <a href="receive.html" class="nav-link">Receive File</a>
+            <a href="qr.html" class="nav-link">QR Share</a>
+            <a href="chat.html" class="nav-link">ChatUs</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="about.html" class="nav-link">About</a>
+          </nav>
+          
+          <!-- Mobile Hamburger Menu -->
+          <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav class="mobile-nav" aria-label="Mobile navigation">
+          <a href="index.html" class="mobile-nav-link">Home</a>
+          <a href="send.html" class="mobile-nav-link active">Send File</a>
+          <a href="multisend.html" class="mobile-nav-link">MultiSend</a>
+          <a href="receive.html" class="mobile-nav-link">Receive File</a>
+          <a href="qr.html" class="mobile-nav-link">QR Share</a>
+          <a href="chat.html" class="mobile-nav-link">ChatUs</a>
+          <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+          <a href="about.html" class="mobile-nav-link">About</a>
+        </nav>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- SEND FILE SECTION -->
+        <section class="send-section">
+          <div class="container">
+            <div class="page-header">
+              <h1 class="page-title">Send File</h1>
+              <p class="page-description">Drop a file, add an optional note, and generate a one-time key</p>
+            </div>
+            
+            <div class="upload-card">
+              <div class="dropzone" id="dropZone">
+                <div class="dropzone-content">
+                  <div class="dropzone-icon">📤</div>
+                  <h3 class="dropzone-title">Drag & drop your file here</h3>
+                  <p class="dropzone-subtitle">or click to browse</p>
+                  <input type="file" id="fileInput" class="file-input" />
+                  <button class="btn btn-secondary" id="browseBtn">Choose File</button>
+                </div>
+              </div>
+              
+              <div class="upload-options">
+                <div class="form-group">
+                  <label for="noteInput" class="form-label">Optional Note</label>
+                  <textarea
+                    id="noteInput"
+                    class="form-textarea"
+                    placeholder="Add a message for the recipient..."
+                    rows="3"
+                  ></textarea>
+                </div>
+                
+                <!-- Expiry Time Selector -->
+                <div class="form-group expiry-group">
+                  <label class="form-label">Key Expiry Time</label>
+                  <div class="expiry-selector">
+                    <input 
+                      type="number" 
+                      id="expiryValue" 
+                      class="expiry-input" 
+                      min="1" 
+                      max="60" 
+                      value="12" 
+                      placeholder="12"
+                    >
+                    <select id="expiryUnit" class="expiry-dropdown">
+                      <option value="minutes">Minutes</option>
+                      <option value="hours" selected>Hours</option>
+                      <option value="days">Days</option>
+                    </select>
+                  </div>
+                  <small class="expiry-help">Key will expire after the specified time</small>
+                </div>
+                
+                <button id="generateKeyBtn" class="btn btn-primary">Generate Secure Key</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <!-- Column 1 — AirPass -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">AirPass</h3>
+              <ul class="footer-links">
+                <li><a href="about.html" class="footer-link">About</a></li>
+                <li><a href="how-it-works.html" class="footer-link">How It Works</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 2 — File Tools -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">File Tools</h3>
+              <ul class="footer-links">
+                <li><a href="send.html" class="footer-link">Send File</a></li>
+                <li><a href="multisend.html" class="footer-link">MultiSend</a></li>
+                <li><a href="receive.html" class="footer-link">Receive File</a></li>
+                <li><a href="qr.html" class="footer-link">QR Share</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 3 — Support -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">Support</h3>
+              <ul class="footer-links">
+                <li><a href="#" class="footer-link">FAQs</a></li>
+                <li><a href="#" class="footer-link">Contact</a></li>
+                <li><a href="#" class="footer-link">Terms & Privacy</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Centered bottom line -->
+          <div class="footer-divider"></div>
+          <p class="footer-copyright">© AirPass · Secure File Sharing</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="send.js"></script>
+    <script src="navbar.js"></script>
+  </body>
+</html>

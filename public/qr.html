@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Share - AirPass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Blanka&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Generate QR codes for easy file sharing">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="app-root">
+        <!-- RESPONSIVE NAVBAR -->
+        <header class="navbar" aria-label="AirPass main navigation">
+            <div class="container">
+                <div class="nav-left">
+                    <span class="nav-brand">AIRPASS</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="nav-links" aria-label="Primary navigation">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="send.html" class="nav-link">Send File</a>
+                    <a href="multisend.html" class="nav-link">MultiSend</a>
+                    <a href="receive.html" class="nav-link">Receive File</a>
+                    <a href="qr.html" class="nav-link active">QR Share</a>
+                    <a href="chat.html" class="nav-link">ChatUs</a>
+                    <a href="how-it-works.html" class="nav-link">How It Works</a>
+                    <a href="about.html" class="nav-link">About</a>
+                </nav>
+          
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <nav class="mobile-nav" aria-label="Mobile navigation">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="send.html" class="mobile-nav-link">Send File</a>
+                <a href="multisend.html" class="mobile-nav-link">MultiSend</a>
+                <a href="receive.html" class="mobile-nav-link">Receive File</a>
+                <a href="qr.html" class="mobile-nav-link active">QR Share</a>
+                <a href="chat.html" class="mobile-nav-link">ChatUs</a>
+                <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+                <a href="about.html" class="mobile-nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="container">
+                <section class="page-section">
+                    <div class="page-header">
+                        <h1 class="page-title">QR Share</h1>
+                        <p class="page-description">Generate QR codes for existing file keys</p>
+                    </div>
+
+                    <div class="upload-card">
+                        <div class="qr-section-header">
+                            <h2>Generate QR Code</h2>
+                            <p>Enter your file key to create a scannable QR code</p>
+                        </div>
+
+                        <div class="qr-input-section">
+                            <div class="qr-input-group">
+                                <input 
+                                    type="text" 
+                                    id="qrKeyInput" 
+                                    placeholder="Enter your file key here..."
+                                    maxlength="50"
+                                    class="qr-key-input"
+                                >
+                                <button onclick="generateQR()" class="btn btn-primary qr-generate-btn">Generate QR Code</button>
+                            </div>
+                        </div>
+
+                        <div class="qr-display-section" id="qrDisplaySection" style="display: none;">
+                            <div class="qr-container">
+                                <div class="qr-header">
+                                    <h3>QR Code Generated</h3>
+                                    <p>Scan this QR code to download the file</p>
+                                </div>
+                                
+                                <div class="qr-code-wrapper" style="display: flex; justify-content: center; margin: 2rem 0;">
+                                    <div id="qrCodeCanvas" style="width:260px; height:260px; background:#111; border-radius:12px; padding:12px; display: flex; align-items: center; justify-content: center;"></div>
+                                </div>
+                                
+                                <div class="qr-info">
+                                    <div class="key-display">
+                                        <span class="key-label">File Key:</span>
+                                        <span class="key-value" id="displayKey"></span>
+                                    </div>
+                                    <p class="download-url">
+                                        <span class="url-label">Download URL:</span>
+                                        <span class="url-value" id="downloadUrl"></span>
+                                    </p>
+                                </div>
+                                
+                                <div class="qr-actions">
+                                    <button onclick="copyUrl()" class="btn btn-secondary qr-copy-btn">📋 Copy URL</button>
+                                    <button onclick="downloadQR()" class="btn btn-secondary qr-download-btn">💾 Download QR</button>
+                                    <button onclick="shareQR()" class="btn btn-primary qr-share-btn">📤 Share QR</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="help-section">
+                            <h3>How to use QR Share</h3>
+                            <div class="qr-steps-container">
+                                <div class="qr-step-card">
+                                    <div class="step-indicator">01</div>
+                                    <div class="step-content">
+                                        <h4>Enter File Key</h4>
+                                        <p>Paste the file key you received after uploading a file</p>
+                                    </div>
+                                </div>
+                                <div class="step-divider"></div>
+                                <div class="qr-step-card">
+                                    <div class="step-indicator">02</div>
+                                    <div class="step-content">
+                                        <h4>Generate QR Code</h4>
+                                        <p>Click the generate button to create a scannable QR code</p>
+                                    </div>
+                                </div>
+                                <div class="step-divider"></div>
+                                <div class="qr-step-card">
+                                    <div class="step-indicator">03</div>
+                                    <div class="step-content">
+                                        <h4>Share & Download</h4>
+                                        <p>Share the QR code or download it for offline sharing</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <!-- Column 1 — AirPass -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">AirPass</h3>
+              <ul class="footer-links">
+                <li><a href="about.html" class="footer-link">About</a></li>
+                <li><a href="how-it-works.html" class="footer-link">How It Works</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 2 — File Tools -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">File Tools</h3>
+              <ul class="footer-links">
+                <li><a href="send.html" class="footer-link">Send File</a></li>
+                <li><a href="multisend.html" class="footer-link">MultiSend</a></li>
+                <li><a href="receive.html" class="footer-link">Receive File</a></li>
+                <li><a href="qr.html" class="footer-link">QR Share</a></li>
+              </ul>
+            </div>
+            
+            <!-- Column 3 — Support -->
+            <div class="footer-column">
+              <h3 class="footer-column-title">Support</h3>
+              <ul class="footer-links">
+                <li><a href="#" class="footer-link">FAQs</a></li>
+                <li><a href="#" class="footer-link">Contact</a></li>
+                <li><a href="#" class="footer-link">Terms & Privacy</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Centered bottom line -->
+          <div class="footer-divider"></div>
+          <p class="footer-copyright">© AirPass · Secure File Sharing</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="theme.js"></script>
+    <script src="navbar.js"></script>
+    <script>
+        let currentKey = '';
+        let currentUrl = '';
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Add enter key support
+            document.getElementById('qrKeyInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    generateQR();
+                }
+            });
+
+            // Check for URL parameters on page load
+            const urlParams = new URLSearchParams(window.location.search);
+            const key = urlParams.get('key');
+            if (key) {
+                document.getElementById('qrKeyInput').value = key;
+                generateQR();
+            }
+        });
+
+        async function generateQR() {
+            const key = document.getElementById("qrKeyInput").value.trim();
+
+            if (!key) {
+                alert("Please enter a valid key");
+                return;
+            }
+
+            try {
+                // Validate key exists and isn't expired
+                const response = await fetch(`/api/file-info/${key}`);
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        showNotification('Key not found. Please check the key and try again.', 'error');
+                        return;
+                    } else if (response.status === 410) {
+                        showNotification('This key has expired. Please request a new sharing link.', 'error');
+                        return;
+                    } else {
+                        showNotification('Error validating key. Please try again.', 'error');
+                        return;
+                    }
+                }
+
+                const url = `${window.location.origin}/receive.html?key=${key}`;
+                currentKey = key;
+                currentUrl = url;
+
+                const qrBox = document.getElementById("qrCodeCanvas");
+                qrBox.innerHTML = ""; // Clear previous QR
+
+                new QRCode(qrBox, {
+                    text: url,
+                    width: 256,
+                    height: 256,
+                    correctLevel: QRCode.CorrectLevel.H,
+                });
+
+                // Show QR display section
+                document.getElementById('qrDisplaySection').style.display = 'block';
+                document.getElementById('displayKey').textContent = key;
+                document.getElementById('downloadUrl').textContent = url;
+
+                showNotification('QR code generated successfully!', 'success');
+                
+                // Scroll to QR section
+                document.getElementById('qrDisplaySection').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            } catch (error) {
+                console.error('Error generating QR code:', error);
+                showNotification('Error generating QR code. Please try again.', 'error');
+            }
+        }
+
+        function downloadQR() {
+            const canvas = document.querySelector("#qrCodeCanvas canvas");
+            if (!canvas) return alert("QR not generated yet");
+
+            const link = document.createElement("a");
+            link.download = "AirPass-QR.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+            showNotification('QR code downloaded!', 'success');
+        }
+
+        function shareQR() {
+            const canvas = document.querySelector("#qrCodeCanvas canvas");
+            if (!canvas) return alert("QR not generated yet");
+
+            if (navigator.share) {
+                canvas.toBlob((blob) => {
+                    const file = new File([blob], "AirPass-QR.png", { type: "image/png" });
+                    navigator.share({
+                        title: "AirPass Download QR",
+                        files: [file]
+                    }).then(() => {
+                        showNotification('Shared successfully!', 'success');
+                    }).catch(() => {
+                        copyUrl(); // Fallback
+                    });
+                });
+            } else {
+                copyUrl(); // Fallback to copy URL
+            }
+        }
+
+        async function copyUrl() {
+            try {
+                await navigator.clipboard.writeText(currentUrl);
+                const btn = document.querySelector('.qr-copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                btn.style.background = '#10b981';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+                showNotification('URL copied to clipboard!', 'success');
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = currentUrl;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('URL copied to clipboard!', 'success');
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            const existing = document.querySelector('.notification');
+            if (existing) {
+                existing.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                z-index: 10000;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Expired key modal functions
+        function showExpiredModal() {
+            const modal = document.getElementById('expiredModal');
+            if (modal) {
+                modal.classList.add('show');
+            }
+        }
+
+        function closeExpiredModal() {
+            const modal = document.getElementById('expiredModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+    </script>
+
+    <style>
+        /* Modern Page Layout */
+        .main-content .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* QR Section Styles */
+        .qr-section-header {
+            text-align: center;
+            padding: 2rem;
+            border-bottom: 1px solid #2a2a2a;
+            margin-bottom: 2rem;
+        }
+        
+        .qr-section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 0.75rem 0;
+        }
+        
+        .qr-section-header p {
+            font-size: 1rem;
+            color: #888888;
+            margin: 0;
+        }
+        
+
+        
+        /* Modern Input Section */
+        .qr-input-section {
+            padding: 2rem;
+            margin-bottom: 0;
+        }
+        
+        .qr-input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .qr-key-input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+        
+        .qr-key-input:focus {
+            outline: none;
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .qr-key-input::placeholder {
+            color: #555555;
+        }
+        
+        .qr-generate-btn {
+            padding: 1rem 2rem;
+            white-space: nowrap;
+            min-width: 180px;
+        }
+
+        /* QR Help Section */
+        .help-section {
+            padding: 2rem;
+            border-top: 1px solid rgba(42, 42, 42, 0.5);
+            margin-top: 0;
+        }
+        
+        .help-section h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .qr-steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .qr-step-card {
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .qr-step-card:hover {
+            background: rgba(26, 26, 26, 0.8);
+            border-color: #3a3a3a;
+            transform: translateY(-2px);
+        }
+        
+        .step-indicator {
+            background: linear-gradient(135deg, #374151, #1f2937);
+            color: #d1d5db;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+            border: 1px solid #4a4a4a;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .step-content p {
+            font-size: 0.9rem;
+            color: #888888;
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        .step-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2a2a2a, transparent);
+            margin: 0.5rem 0;
+        }
+        
+        .qr-display-section {
+            margin-top: 0;
+            padding: 2rem;
+            border-top: 1px solid rgba(42, 42, 42, 0.5);
+        }
+        
+        .qr-container {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-header h3 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .qr-header p {
+            color: #8a8a8a;
+            margin-bottom: 2rem;
+        }
+
+        .qr-code-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        #qrCanvas {
+            border-radius: 8px;
+        }
+
+        .qr-info {
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .key-display {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .key-label, .url-label {
+            color: #8a8a8a;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .key-value {
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+        }
+
+        .download-url {
+            color: #8a8a8a;
+            font-size: 0.9rem;
+        }
+
+        .url-value {
+            color: #ffffff;
+            font-size: 0.8rem;
+            word-break: break-all;
+        }
+
+        .qr-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .help-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .help-section h3 {
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .main-content .container {
+                padding: 0 1rem;
+            }
+            
+            .qr-section-header,
+            .qr-input-section,
+            .help-section,
+            .qr-display-section {
+                padding: 1.5rem;
+            }
+            
+            .page-title-modern {
+                font-size: 2rem;
+            }
+            
+            .page-subtitle-modern {
+                font-size: 1rem;
+            }
+            
+            .qr-input-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .qr-generate-btn {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .qr-step-card {
+                padding: 1.25rem;
+                gap: 1rem;
+            }
+            
+            .step-indicator {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.9rem;
+            }
+            
+            .step-content h4 {
+                font-size: 1rem;
+            }
+            
+            .step-content p {
+                font-size: 0.85rem;
+            }
+            
+            .qr-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .qr-actions {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .qr-actions .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-content .container {
+                padding: 0 0.75rem;
+            }
+            
+            .qr-section-header,
+            .qr-input-section,
+            .help-section,
+            .qr-display-section {
+                padding: 1rem;
+            }
+            
+            .qr-step-card {
+                padding: 1rem;
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .step-content {
+                text-align: center;
+            }
+        }
+        
+        /* Animation Keyframes */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>    
+    <!-- Expired Key Modal -->
+    <div class="expired-modal-overlay" id="expiredModal">
+        <div class="expired-modal">
+            <div class="expired-modal-icon">⏰</div>
+            <h3>Key Expired</h3>
+            <p>This key has expired. Please ask the sender to upload again.</p>
+            <button class="expired-modal-btn" onclick="closeExpiredModal()">Try Again</button>
+        </div>
+    </div>
+    <script src=\"navbar.js\"></script>
+</body>
+</html>

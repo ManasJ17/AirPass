@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatUs - AirPass</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+</head>
+<body>
+    <div class="app-root">
+        <!-- RESPONSIVE NAVBAR -->
+        <header class="navbar" aria-label="AirPass main navigation">
+            <div class="container">
+                <div class="nav-left">
+                    <span class="nav-brand">AIRPASS</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="nav-links" aria-label="Primary navigation">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="send.html" class="nav-link">Send File</a>
+                    <a href="multisend.html" class="nav-link">MultiSend</a>
+                    <a href="receive.html" class="nav-link">Receive File</a>
+                    <a href="qr.html" class="nav-link">QR Share</a>
+                    <a href="chat.html" class="nav-link active">ChatUs</a>
+                    <a href="how-it-works.html" class="nav-link">How It Works</a>
+                    <a href="about.html" class="nav-link">About</a>
+                </nav>
+                
+                <!-- Mobile Hamburger Menu -->
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <nav class="mobile-nav" aria-label="Mobile navigation">
+                <a href="index.html" class="mobile-nav-link">Home</a>
+                <a href="send.html" class="mobile-nav-link">Send File</a>
+                <a href="multisend.html" class="mobile-nav-link">MultiSend</a>
+                <a href="receive.html" class="mobile-nav-link">Receive File</a>
+                <a href="qr.html" class="mobile-nav-link">QR Share</a>
+                <a href="chat.html" class="mobile-nav-link active">ChatUs</a>
+                <a href="how-it-works.html" class="mobile-nav-link">How It Works</a>
+                <a href="about.html" class="mobile-nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- Landing Screen -->
+            <section id="landing-screen" class="chat-section">
+                <div class="container">
+                    <div class="page-header">
+                        <h1 class="page-title">ChatUs</h1>
+                        <p class="page-description">Temporary, key-based real-time chat rooms</p>
+                        <p class="page-meta">No accounts required • Auto-expires in 12 hours • Share a key to invite others</p>
+                    </div>
+                    
+                    <div class="chat-actions">
+                        <div class="action-group">
+                            <button id="start-chat-btn" class="btn btn-primary chat-action-btn">
+                                <span class="btn-icon">🚀</span>
+                                Start a Room
+                            </button>
+                            <p class="action-description">Create a private chat room and generate a secure key</p>
+                        </div>
+                        
+                        <div class="action-group">
+                            <button id="join-chat-btn" class="btn btn-secondary chat-action-btn">
+                                <span class="btn-icon">🔑</span>
+                                Join a Room
+                            </button>
+                            <p class="action-description">Enter a room key to join an existing chat</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Create Chat Screen -->
+            <section id="create-chat-screen" class="chat-section" style="display: none;">
+                <div class="container">
+                    <div class="page-header">
+                        <button id="back-from-create" class="back-link">← Back to ChatUs</button>
+                        <h1 class="page-title">Your Chat Key</h1>
+                        <p class="page-description">Share this key with others to invite them to your chat room</p>
+                    </div>
+                    
+                    <div class="key-card">
+                        <div class="key-display-section">
+                            <label class="form-label">Room Key</label>
+                            <div id="generated-key" class="key-display"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="creator-name" class="form-label">Enter your display name</label>
+                            <input type="text" id="creator-name" class="form-input" placeholder="Your name" maxlength="30" autocomplete="off">
+                        </div>
+                        
+                        <button id="enter-chat-btn" class="btn btn-primary" disabled>
+                            Enter Chat Room
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Join Chat Screen -->
+            <section id="join-chat-screen" class="chat-section" style="display: none;">
+                <div class="container">
+                    <div class="page-header">
+                        <button id="back-from-join" class="back-link">← Back to ChatUs</button>
+                        <h1 class="page-title">Join a Chat Room</h1>
+                        <p class="page-description">Enter the chat key you received</p>
+                    </div>
+                    
+                    <div class="key-card">
+                        <div class="form-group">
+                            <label for="chat-key" class="form-label">Chat Key</label>
+                            <input type="text" id="chat-key" class="form-input" placeholder="Enter 10-character key" maxlength="10" autocomplete="off" style="text-transform: uppercase;">
+                            <p class="form-hint">Format: 10 alphanumeric characters (e.g., A9F2K8LQX3)</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="joiner-name" class="form-label">Your display name</label>
+                            <input type="text" id="joiner-name" class="form-input" placeholder="Your name" maxlength="30" autocomplete="off">
+                        </div>
+                        
+                        <button id="join-room-btn" class="btn btn-primary" disabled>
+                            Join Chat Room
+                        </button>
+                        
+                        <div id="join-error" class="error-message" style="display: none;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chat Room Screen -->
+            <section id="chat-room-screen" class="chat-section" style="display: none;">
+                <div class="container">
+                    <div class="chat-header">
+                        <div class="chat-info">
+                            <h3>Chat Room: <span id="current-room-key"></span></h3>
+                            <div class="chat-meta">
+                                <p>Connected as: <span id="current-user-name"></span></p>
+                                <p class="user-count"><span id="user-count">0 users</span></p>
+                            </div>
+                        </div>
+                        <button id="leave-chat-btn" class="btn btn-secondary btn-sm">Leave Chat</button>
+                    </div>
+
+                    <div class="chat-container">
+                        <div id="messages-container" class="messages-area">
+                            <!-- Messages will appear here -->
+                        </div>
+                        
+                        <div class="message-input-area">
+                            <div id="typing-indicator" class="typing-indicator" style="display: none;">
+                                <span id="typing-text"></span>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="message-input" class="form-input" placeholder="Type your message..." maxlength="500" autocomplete="off">
+                                <button id="send-message-btn" class="btn btn-primary">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="connection-status" class="connection-status">
+                        <span id="status-indicator" class="status-connected">●</span>
+                        <span id="status-text">Connected</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading overlay -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Connecting...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="navbar.js"></script>
+    <script src="modal.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
