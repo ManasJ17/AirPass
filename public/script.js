@@ -1,5 +1,27 @@
 // AirPass - Minimal JavaScript for interactions
 
+// Announcement banner dismiss functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const banner = document.getElementById('announcement-banner');
+  const closeBtn = document.getElementById('close-banner');
+  
+  // Check if banner was previously dismissed
+  if (localStorage.getItem('announcement-dismissed') === 'true') {
+    if (banner) banner.style.display = 'none';
+  }
+  
+  // Handle banner dismiss
+  if (closeBtn && banner) {
+    closeBtn.addEventListener('click', function() {
+      banner.style.transform = 'translateY(-100%)';
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 300);
+      localStorage.setItem('announcement-dismissed', 'true');
+    });
+  }
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {

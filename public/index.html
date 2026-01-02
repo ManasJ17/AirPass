@@ -9,6 +9,26 @@
   </head>
   <body>
     <div class="app-root">
+      <!-- ANNOUNCEMENT BANNER -->
+      <div id="announcement-banner" class="announcement-banner">
+        <div class="container">
+          <div class="announcement-content">
+            <span class="announcement-text">
+              🚀 New: Try <strong>ChatUs</strong> — temporary, key-based real-time chat inside AirPass.
+            </span>
+            <div class="announcement-actions">
+              <a href="chat.html" class="announcement-btn">Try ChatUs →</a>
+              <button id="close-banner" class="announcement-close" aria-label="Dismiss announcement">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <!-- RESPONSIVE NAVBAR -->
       <header class="navbar" aria-label="AirPass main navigation">
         <div class="container">
@@ -59,6 +79,9 @@
             <div class="hero-cta">
               <a href="send.html" class="btn btn-primary">Send a file →</a>
               <a href="receive.html" class="btn btn-secondary">Receive a file →</a>
+            </div>
+            <div class="hero-secondary-cta">
+              <a href="chat.html" class="secondary-cta-link">Need quick discussion? Try ChatUs →</a>
             </div>
           </div>
         </section>
@@ -128,6 +151,19 @@
                 </div>
                 <h3 class="feature-title">Auto-Expiry</h3>
                 <p class="feature-description">Files automatically expire for maximum security</p>
+              </div>
+
+              <!-- Feature Card 6 - ChatUs -->
+              <div class="feature-card" onclick="window.location.href='chat.html'" style="cursor: pointer;">
+                <div class="feature-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    <path d="M13 8H7"/>
+                    <path d="M17 12H7"/>
+                  </svg>
+                </div>
+                <h3 class="feature-title">ChatUs</h3>
+                <p class="feature-description">Temporary, key-based real-time chat rooms with no accounts and automatic expiry</p>
               </div>
             </div>
           </div>
